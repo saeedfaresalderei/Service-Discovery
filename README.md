@@ -52,24 +52,29 @@ guards against it in three ways:
    entry can be deleted in one click. The original seeded directory entries are not
    removable, so the core directory can't be wiped out by mistake.
 
-In a production deployment with a real backend, this would extend to an admin
-moderation queue before a submission goes public — the current client-side checks are
-the hackathon-scale version of that same safeguard.
+### Admin review (real, cross-device)
 
-### Admin review (prototype)
+New community submissions are stored in a shared **Firebase Firestore** database with
+a **"pending"** status, and are hidden from public search until approved. An **Admin**
+link (bottom of the page) opens a real login (Firebase Authentication, email +
+password) — any signed-in admin, from any device or browser, sees the same live
+pending queue and can **approve** (goes live for everyone immediately) or **reject**
+(deletes it). Approved listings can also be removed later from the same panel if a
+mistake slips through.
 
-New community submissions are saved with a **"pending"** status and stay hidden from
-public search until approved. A passcode-gated **Admin** link (bottom of the page)
-opens a review queue where pending submissions can be **approved** (goes live) or
-**rejected** (deleted).
+Security is enforced by **Firestore rules**, not by hiding the config:
 
-**Important limitation, by design**: this app has no backend, so all data — including
-the pending queue — lives in the browser's `localStorage` on a single device. This
-demo proves the moderation *workflow*, but it cannot let an admin review submissions
-made on a different device. A production version would move this queue into a shared
-database (e.g. Firebase/Supabase) so submissions are centrally stored and any admin,
-from any device, can review them — the UI and approve/reject logic would not need to
-change, only where the data lives.
+```
+match /services/{serviceId} {
+  allow read: if resource.data.status == "approved" || request.auth != null;
+  allow create: if request.resource.data.status == "pending";
+  allow update, delete: if request.auth != null;
+}
+```
+
+Anyone can submit (always starts as `pending`); only an authenticated admin can read
+pending submissions, approve, or reject. The public search query only ever reads
+`approved` documents, so unmoderated content is never shown by default.
 
 ## Tech Stack
 

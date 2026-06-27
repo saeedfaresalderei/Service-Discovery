@@ -404,6 +404,31 @@ dialog::backdrop {
   margin: 0 0 1rem;
 }
 
+.admin-dialog {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel-header .admin-link {
+  margin: 0;
+}
+
+#adminPanel h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .admin-pending-card {
   background: var(--sand);
   border: 1px solid var(--sand-dark);

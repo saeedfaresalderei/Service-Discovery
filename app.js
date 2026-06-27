@@ -1,3 +1,39 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  where,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAc0RJbg4sQD1dGsWvusVAuuw8kqmnJMks",
+  authDomain: "alqua-service-discovery.firebaseapp.com",
+  projectId: "alqua-service-discovery",
+  storageBucket: "alqua-service-discovery.firebasestorage.app",
+  messagingSenderId: "574788845441",
+  appId: "1:574788845441:web:1874be84cf244aaf37b280",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
+const servicesCollection = collection(db, "services");
+
+let baseServices = [];
+let approvedCustomServices = [];
+let pendingCustomServices = [];
 let services = [];
 let activeCategory = "All";
 let currentLang = localStorage.getItem("alqua-lang") || "en";
@@ -32,7 +68,6 @@ const UI_TEXT = {
     footer: "Built for the Tatweer Hackathon 2026 — Service Discovery Challenge — Al Qua'a, Al Ain.",
     getDirections: "Get directions",
     communityBadge: "Community-submitted",
-    removeListing: "Remove this listing",
     resultsFound: (n) => `${n} service${n === 1 ? "" : "s"} found`,
     toggleLabel: "العربية",
   },
@@ -58,7 +93,6 @@ const UI_TEXT = {
     footer: "صُمم لهاكاثون تطوير ٢٠٢٦ — تحدي اكتشاف الخدمات — القُعة، العين.",
     getDirections: "احصل على الاتجاهات",
     communityBadge: "مُقدّمة من المجتمع",
-    removeListing: "إزالة هذه الخدمة",
     resultsFound: (n) => `تم العثور على ${n} خدمة`,
     toggleLabel: "English",
   },
@@ -126,6 +160,10 @@ langToggle.addEventListener("click", () => {
   setLanguage(currentLang === "en" ? "ar" : "en");
 });
 
+function recomputeServices() {
+  services = [...baseServices, ...approvedCustomServices];
+}
+
 function renderCategoryChips() {
   const categories = ["All", ...new Set(services.map((s) => s.category))];
   categoryFilters.innerHTML = categories
@@ -171,18 +209,15 @@ function displayField(service, field) {
 function buildMapsUrl(location, name) {
   const trimmed = location.trim();
 
-  // Full Google Maps link/share URL pasted directly — use as-is.
   if (/^https?:\/\//i.test(trimmed)) {
     return trimmed;
   }
 
-  // Plain "lat, lng" e.g. 23.400699765840685, 55.42609682461352
   const plainCoords = trimmed.match(/^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/);
   if (plainCoords) {
     return `https://www.google.com/maps/search/?api=1&query=${plainCoords[1]},${plainCoords[2]}`;
   }
 
-  // Degree-symbol coords e.g. 23.4007° N, 55.4261° E
   const degreeCoords = trimmed.match(
     /^(\d+(?:\.\d+)?)\s*°?\s*([NS])\s*,\s*(\d+(?:\.\d+)?)\s*°?\s*([EW])$/i
   );
@@ -192,17 +227,13 @@ function buildMapsUrl(location, name) {
     return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
   }
 
-  // Plain text address — search by address + service name.
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${trimmed} ${name}`)}`;
 }
 
 function renderResults() {
   const query = searchInput.value.trim();
   const filtered = services.filter(
-    (s) =>
-      s.status !== "pending" &&
-      (activeCategory === "All" || s.category === activeCategory) &&
-      matchesQuery(s, query)
+    (s) => (activeCategory === "All" || s.category === activeCategory) && matchesQuery(s, query)
   );
 
   resultsCount.textContent = t("resultsFound")(filtered.length);
@@ -227,48 +258,27 @@ function renderResults() {
         </div>
         <div class="service-meta">🕒 ${escapeHtml(hours)}</div>
         <div class="service-meta">📞 <a href="tel:${escapeHtml(s.phone)}">${escapeHtml(s.phone)}</a></div>
-        ${s.isCustom ? `<button class="remove-btn" data-id="${escapeHtml(s.id)}" type="button">${escapeHtml(t("removeListing"))}</button>` : ""}
       </article>
     `;
     })
     .join("");
-
-  resultsGrid.querySelectorAll(".remove-btn").forEach((btn) => {
-    btn.addEventListener("click", () => removeCustomService(btn.dataset.id));
-  });
-}
-
-function removeCustomService(id) {
-  if (!confirm("Remove this listing? This can't be undone.")) return;
-  const custom = loadCustomServices().filter((s) => s.id !== id);
-  saveCustomServices(custom);
-  services = services.filter((s) => s.id !== id);
-  renderCategoryChips();
-  renderResults();
-}
-
-const CUSTOM_KEY = "alqua-custom-services";
-
-function loadCustomServices() {
-  try {
-    return JSON.parse(localStorage.getItem(CUSTOM_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveCustomServices(list) {
-  localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
 }
 
 async function init() {
   applyStaticTranslations();
 
   const res = await fetch(`data/services.json?v=${Date.now()}`, { cache: "no-store" });
-  const baseServices = await res.json();
-  services = [...baseServices, ...loadCustomServices().map((s) => ({ ...s, isCustom: true }))];
+  baseServices = await res.json();
+  recomputeServices();
   renderCategoryChips();
   renderResults();
+
+  onSnapshot(query(servicesCollection, where("status", "==", "approved")), (snapshot) => {
+    approvedCustomServices = snapshot.docs.map((d) => ({ id: d.id, ...d.data(), isCustom: true }));
+    recomputeServices();
+    renderCategoryChips();
+    renderResults();
+  });
 }
 
 const PHONE_PATTERN = /^\+?[0-9\s-]{7,}$/;
@@ -319,7 +329,7 @@ cancelAddBtn.addEventListener("click", () => addServiceDialog.close());
 
 const formErrors = document.getElementById("formErrors");
 
-addServiceForm.addEventListener("submit", (e) => {
+addServiceForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(addServiceForm);
 
@@ -333,7 +343,7 @@ addServiceForm.addEventListener("submit", (e) => {
     tags: formData
       .get("tags")
       .split(",")
-      .map((t) => t.trim())
+      .map((tag) => tag.trim())
       .filter(Boolean),
   };
 
@@ -348,36 +358,90 @@ addServiceForm.addEventListener("submit", (e) => {
   const summary = `Please confirm this is correct before submitting it for review:\n\n${draft.name}\n${draft.category}\n${draft.location}\n${draft.hours}\n${draft.phone}`;
   if (!confirm(summary)) return;
 
-  const newService = { id: `custom-${Date.now()}`, ...draft, isCustom: true, status: "pending" };
-
-  const custom = loadCustomServices();
-  custom.push(newService);
-  saveCustomServices(custom);
-
-  services.push(newService);
-  renderCategoryChips();
-  renderResults();
-
-  addServiceForm.reset();
-  addServiceDialog.close();
-  alert("Thanks! Your submission is pending admin review and will appear once approved.");
+  try {
+    await addDoc(servicesCollection, { ...draft, status: "pending" });
+    addServiceForm.reset();
+    addServiceDialog.close();
+    alert("Thanks! Your submission is pending admin review and will appear once approved.");
+  } catch (err) {
+    formErrors.innerHTML = `<li>Could not submit: ${escapeHtml(err.message)}</li>`;
+    formErrors.hidden = false;
+  }
 });
 
-const ADMIN_PASSCODE = "alqua-admin";
+// --- Admin login + review panel ---
+
 const adminBtn = document.getElementById("adminBtn");
 const adminDialog = document.getElementById("adminDialog");
+const adminLoginForm = document.getElementById("adminLoginForm");
+const adminLoginErrors = document.getElementById("adminLoginErrors");
+const adminEmail = document.getElementById("adminEmail");
+const adminPassword = document.getElementById("adminPassword");
+const adminPanel = document.getElementById("adminPanel");
 const adminPendingList = document.getElementById("adminPendingList");
+const adminApprovedList = document.getElementById("adminApprovedList");
 const closeAdminBtn = document.getElementById("closeAdminBtn");
+const closeAdminPanelBtn = document.getElementById("closeAdminPanelBtn");
+const adminLogoutBtn = document.getElementById("adminLogoutBtn");
 
-function renderAdminPanel() {
-  const pending = loadCustomServices().filter((s) => s.status === "pending");
+let unsubscribePending = null;
+let unsubscribeApprovedAdmin = null;
 
-  if (pending.length === 0) {
+adminBtn.addEventListener("click", () => {
+  adminDialog.showModal();
+});
+
+closeAdminBtn.addEventListener("click", () => adminDialog.close());
+closeAdminPanelBtn.addEventListener("click", () => adminDialog.close());
+
+adminLoginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  adminLoginErrors.hidden = true;
+  try {
+    await signInWithEmailAndPassword(auth, adminEmail.value.trim(), adminPassword.value);
+  } catch (err) {
+    adminLoginErrors.textContent = "Login failed: " + err.message;
+    adminLoginErrors.hidden = false;
+  }
+});
+
+adminLogoutBtn.addEventListener("click", () => signOut(auth));
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    adminLoginForm.hidden = true;
+    adminPanel.hidden = false;
+    adminPassword.value = "";
+    subscribeAdminData();
+  } else {
+    adminLoginForm.hidden = false;
+    adminPanel.hidden = true;
+    if (unsubscribePending) unsubscribePending();
+    if (unsubscribeApprovedAdmin) unsubscribeApprovedAdmin();
+  }
+});
+
+function subscribeAdminData() {
+  unsubscribePending = onSnapshot(query(servicesCollection, where("status", "==", "pending")), (snapshot) => {
+    pendingCustomServices = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+    renderAdminPending();
+  });
+
+  unsubscribeApprovedAdmin = onSnapshot(
+    query(servicesCollection, where("status", "==", "approved")),
+    (snapshot) => {
+      renderAdminApproved(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
+    }
+  );
+}
+
+function renderAdminPending() {
+  if (pendingCustomServices.length === 0) {
     adminPendingList.innerHTML = "<p>No pending submissions.</p>";
     return;
   }
 
-  adminPendingList.innerHTML = pending
+  adminPendingList.innerHTML = pendingCustomServices
     .map(
       (s) => `
       <div class="admin-pending-card">
@@ -395,43 +459,40 @@ function renderAdminPanel() {
     .join("");
 
   adminPendingList.querySelectorAll(".approve-btn").forEach((btn) => {
-    btn.addEventListener("click", () => setSubmissionStatus(btn.dataset.id, "approved"));
+    btn.addEventListener("click", () => updateDoc(doc(db, "services", btn.dataset.id), { status: "approved" }));
   });
   adminPendingList.querySelectorAll(".reject-btn").forEach((btn) => {
-    btn.addEventListener("click", () => setSubmissionStatus(btn.dataset.id, "rejected"));
+    btn.addEventListener("click", () => deleteDoc(doc(db, "services", btn.dataset.id)));
   });
 }
 
-function setSubmissionStatus(id, status) {
-  const custom = loadCustomServices();
-  const target = custom.find((s) => s.id === id);
-  if (!target) return;
-
-  if (status === "rejected") {
-    saveCustomServices(custom.filter((s) => s.id !== id));
-    services = services.filter((s) => s.id !== id);
-  } else {
-    target.status = status;
-    saveCustomServices(custom);
-    const inMemory = services.find((s) => s.id === id);
-    if (inMemory) inMemory.status = status;
-  }
-
-  renderAdminPanel();
-  renderCategoryChips();
-  renderResults();
-}
-
-adminBtn.addEventListener("click", () => {
-  const passcode = prompt("Enter admin passcode:");
-  if (passcode !== ADMIN_PASSCODE) {
-    if (passcode !== null) alert("Incorrect passcode.");
+function renderAdminApproved(approved) {
+  if (approved.length === 0) {
+    adminApprovedList.innerHTML = "<p>No community-submitted listings live yet.</p>";
     return;
   }
-  renderAdminPanel();
-  adminDialog.showModal();
-});
 
-closeAdminBtn.addEventListener("click", () => adminDialog.close());
+  adminApprovedList.innerHTML = approved
+    .map(
+      (s) => `
+      <div class="admin-pending-card">
+        <h4>${escapeHtml(s.name)}</h4>
+        <p><strong>${escapeHtml(s.category)}</strong></p>
+        <div class="admin-actions">
+          <button type="button" class="reject-btn" data-id="${escapeHtml(s.id)}">Remove</button>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+
+  adminApprovedList.querySelectorAll(".reject-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (confirm("Remove this live listing?")) {
+        deleteDoc(doc(db, "services", btn.dataset.id));
+      }
+    });
+  });
+}
 
 init();

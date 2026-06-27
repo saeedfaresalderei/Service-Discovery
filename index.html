@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <header class="site-header">
@@ -73,11 +73,37 @@
     </dialog>
 
     <dialog id="adminDialog" class="admin-dialog">
-      <h2>Admin Review — Pending Submissions</h2>
-      <p class="admin-note">Demo-only moderation queue, local to this browser. See README for the production approach.</p>
-      <div id="adminPendingList"></div>
-      <div class="form-actions">
-        <button type="button" id="closeAdminBtn">Close</button>
+      <h2>Admin Login</h2>
+
+      <form id="adminLoginForm" class="add-service-form">
+        <ul id="adminLoginErrors" class="form-errors" hidden></ul>
+        <label>Email
+          <input type="email" id="adminEmail" required autocomplete="username">
+        </label>
+        <label>Password
+          <input type="password" id="adminPassword" required autocomplete="current-password">
+        </label>
+        <div class="form-actions">
+          <button type="button" id="closeAdminBtn">Cancel</button>
+          <button type="submit" class="primary">Log in</button>
+        </div>
+      </form>
+
+      <div id="adminPanel" hidden>
+        <div class="admin-panel-header">
+          <h2>Admin Review</h2>
+          <button type="button" id="adminLogoutBtn" class="admin-link">Log out</button>
+        </div>
+
+        <h3>Pending Submissions</h3>
+        <div id="adminPendingList"></div>
+
+        <h3>Live Listings (community-submitted)</h3>
+        <div id="adminApprovedList"></div>
+
+        <div class="form-actions">
+          <button type="button" id="closeAdminPanelBtn">Close</button>
+        </div>
       </div>
     </dialog>
 
@@ -101,6 +127,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=7"></script>
+  <script type="module" src="app.js?v=8"></script>
 </body>
 </html>
