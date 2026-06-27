@@ -1,0 +1,164 @@
+:root {
+  --sand: #f4ecdf;
+  --sand-dark: #e3d4b8;
+  --camel-brown: #9c6b3e;
+  --night-blue: #1f2a44;
+  --accent: #c97b3d;
+  --text: #2b2118;
+  --card-bg: #ffffff;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--sand);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.site-header {
+  background: linear-gradient(135deg, var(--night-blue), var(--camel-brown));
+  color: #fff;
+  padding: 2.5rem 0 2rem;
+}
+
+.site-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.9rem;
+}
+
+.tagline {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.search-section {
+  margin: 1.5rem 0 1rem;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--sand-dark);
+  border-radius: var(--radius);
+  outline: none;
+  background: var(--card-bg);
+}
+
+#searchInput:focus {
+  border-color: var(--accent);
+}
+
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.category-chip {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--sand-dark);
+  background: var(--card-bg);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.category-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.emergency-banner {
+  background: #fdecea;
+  border: 1px solid #f1b3ab;
+  color: #7a1f12;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
+}
+
+.emergency-banner a {
+  color: #7a1f12;
+  font-weight: 600;
+}
+
+.results-count {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #5c5142;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.service-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.service-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.service-category {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--camel-brown);
+  font-weight: 700;
+}
+
+.service-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.service-meta {
+  font-size: 0.82rem;
+  color: #5c5142;
+  margin-top: 0.25rem;
+}
+
+.service-meta a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.no-results {
+  text-align: center;
+  color: #5c5142;
+  padding: 2rem 0;
+}
+
+.site-footer {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #6b6151;
+  padding: 1.5rem 0 2.5rem;
+}

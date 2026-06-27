@@ -1,0 +1,82 @@
+[
+  {
+    "id": "alqua-health-clinic",
+    "name": "Al Qua'a Health Clinic",
+    "category": "Healthcare",
+    "description": "Primary healthcare center serving Al Qua'a residents: general consultations, vaccinations, and basic emergency stabilization.",
+    "location": "Al Qua'a Main Road, Al Qua'a, Al Ain",
+    "hours": "Sun–Thu 8:00 AM–4:00 PM",
+    "phone": "+971-3-700-0001",
+    "tags": ["health", "clinic", "emergency", "vaccination"]
+  },
+  {
+    "id": "alqua-municipal-office",
+    "name": "Al Qua'a Municipal Service Center",
+    "category": "Government",
+    "description": "Government services counter for ID renewals, permits, utility applications, and municipal paperwork.",
+    "location": "Al Qua'a Civic Center, Al Ain",
+    "hours": "Sun–Thu 7:30 AM–2:30 PM",
+    "phone": "+971-3-700-0002",
+    "tags": ["government", "permits", "id", "paperwork", "utilities"]
+  },
+  {
+    "id": "camel-farmers-cooperative",
+    "name": "Al Qua'a Camel Farmers Cooperative",
+    "category": "Agriculture & Livestock",
+    "description": "Support hub for camel farming operations: veterinary referrals, feed supply coordination, and market price information.",
+    "location": "Al Qua'a Agricultural Zone, Al Ain",
+    "hours": "Sat–Thu 6:00 AM–12:00 PM",
+    "phone": "+971-3-700-0003",
+    "tags": ["agriculture", "camel", "livestock", "veterinary", "market"]
+  },
+  {
+    "id": "alqua-school",
+    "name": "Al Qua'a Community School",
+    "category": "Education",
+    "description": "Primary and secondary education for local children, plus adult literacy and vocational evening classes.",
+    "location": "Al Qua'a School Road, Al Ain",
+    "hours": "Sun–Thu 7:00 AM–2:00 PM (evening classes 6–8 PM)",
+    "phone": "+971-3-700-0004",
+    "tags": ["education", "school", "literacy", "vocational"]
+  },
+  {
+    "id": "alqua-transport",
+    "name": "Al Qua'a Rural Transport Line",
+    "category": "Transport",
+    "description": "Scheduled minibus service connecting Al Qua'a to Al Ain city center for residents without private vehicles.",
+    "location": "Pickup point: Al Qua'a Roundabout, Al Ain",
+    "hours": "Daily, departures every 2 hours, 6:00 AM–8:00 PM",
+    "phone": "+971-3-700-0005",
+    "tags": ["transport", "bus", "mobility"]
+  },
+  {
+    "id": "civil-defense-alqua",
+    "name": "Civil Defense & Emergency Response – Al Qua'a Sector",
+    "category": "Emergency",
+    "description": "Coordinated emergency response covering fire, medical evacuation, and search-and-rescue across the dispersed Al Qua'a area.",
+    "location": "Al Qua'a Emergency Station, Al Ain",
+    "hours": "24/7",
+    "phone": "+971-3-700-0006",
+    "tags": ["emergency", "fire", "rescue", "evacuation", "24/7"]
+  },
+  {
+    "id": "stargazing-tourism-desk",
+    "name": "Al Qua'a Stargazing & Tourism Desk",
+    "category": "Tourism & Events",
+    "description": "Information point for stargazing tours, desert camping permits, and local cultural events — a growing income opportunity for residents.",
+    "location": "Al Qua'a Visitor Point, Al Ain",
+    "hours": "Thu–Sat 4:00 PM–10:00 PM",
+    "phone": "+971-3-700-0007",
+    "tags": ["tourism", "events", "stargazing", "income", "opportunity"]
+  },
+  {
+    "id": "small-business-support",
+    "name": "Al Qua'a Small Business Support Desk",
+    "category": "Entrepreneurship",
+    "description": "Guidance for first-time founders: business licensing steps, microfinance referrals, and basic bookkeeping help.",
+    "location": "Al Qua'a Civic Center, Al Ain",
+    "hours": "Sun & Tue 9:00 AM–1:00 PM",
+    "phone": "+971-3-700-0008",
+    "tags": ["entrepreneurship", "business", "licensing", "finance"]
+  }
+]

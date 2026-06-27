@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Qua'a Service Discovery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>🐪 Al Qua'a Service Discovery</h1>
+      <p class="tagline">Find local services, support, and opportunities in Al Qua'a — fast.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="search-section" aria-label="Search services">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="What do you need? e.g. clinic, transport, camel, permit..."
+        aria-label="Search services"
+      />
+      <div id="categoryFilters" class="category-filters"></div>
+    </section>
+
+    <section aria-label="Emergency quick access" class="emergency-banner">
+      <strong>Emergency?</strong> Civil Defense &amp; Emergency Response is available 24/7 —
+      <a href="tel:+97137000006">call +971-3-700-0006</a>
+    </section>
+
+    <section>
+      <p id="resultsCount" class="results-count"></p>
+      <div id="resultsGrid" class="results-grid"></div>
+      <p id="noResults" class="no-results" hidden>No services match your search. Try a different keyword.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built for the Tatweer Hackathon 2026 — Service Discovery Challenge — Al Qua'a, Al Ain.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
