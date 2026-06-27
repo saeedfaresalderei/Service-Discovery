@@ -168,6 +168,34 @@ function displayField(service, field) {
   return service[field];
 }
 
+function buildMapsUrl(location, name) {
+  const trimmed = location.trim();
+
+  // Full Google Maps link/share URL pasted directly — use as-is.
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  // Plain "lat, lng" e.g. 23.400699765840685, 55.42609682461352
+  const plainCoords = trimmed.match(/^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/);
+  if (plainCoords) {
+    return `https://www.google.com/maps/search/?api=1&query=${plainCoords[1]},${plainCoords[2]}`;
+  }
+
+  // Degree-symbol coords e.g. 23.4007° N, 55.4261° E
+  const degreeCoords = trimmed.match(
+    /^(\d+(?:\.\d+)?)\s*°?\s*([NS])\s*,\s*(\d+(?:\.\d+)?)\s*°?\s*([EW])$/i
+  );
+  if (degreeCoords) {
+    const lat = degreeCoords[2].toUpperCase() === "S" ? -degreeCoords[1] : +degreeCoords[1];
+    const lng = degreeCoords[4].toUpperCase() === "W" ? -degreeCoords[3] : +degreeCoords[3];
+    return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  }
+
+  // Plain text address — search by address + service name.
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${trimmed} ${name}`)}`;
+}
+
 function renderResults() {
   const query = searchInput.value.trim();
   const filtered = services.filter(
@@ -185,11 +213,7 @@ function renderResults() {
       const description = displayField(s, "description");
       const location = displayField(s, "location");
       const hours = displayField(s, "hours");
-      const coordsMatch = s.location.match(/^\s*(-?\d+(\.\d+)?)\s*,\s*(-?\d+(\.\d+)?)\s*$/);
-      const mapsQuery = encodeURIComponent(
-        coordsMatch ? `${coordsMatch[1]},${coordsMatch[3]}` : `${s.location} ${s.name}`
-      );
-      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+      const mapsUrl = buildMapsUrl(s.location, s.name);
 
       return `
       <article class="service-card">
