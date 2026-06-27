@@ -38,6 +38,24 @@ Residents can:
   especially relevant in an emergency, for new entrepreneurs, or for residents without
   reliable internet access to search engines that don't know Al Qua'a exists.
 
+## Handling mistaken or invalid submissions
+
+Since anyone can add a listing via **+ Add a service**, bad data is a real risk. The app
+guards against it in three ways:
+
+1. **Validation before save** — required fields, a minimum description length, and a
+   phone number format check. Duplicate names/phone numbers are rejected.
+2. **Confirmation step** — before saving, the submitter sees a summary of what they
+   entered and must confirm it's correct.
+3. **Visible removal** — every community-submitted listing is tagged
+   **"Community-submitted"** and shows a **Remove this listing** button, so a mistaken
+   entry can be deleted in one click. The original seeded directory entries are not
+   removable, so the core directory can't be wiped out by mistake.
+
+In a production deployment with a real backend, this would extend to an admin
+moderation queue before a submission goes public — the current client-side checks are
+the hackathon-scale version of that same safeguard.
+
 ## Tech Stack
 
 Plain **HTML / CSS / JavaScript** — zero build tooling, zero dependencies. Chosen
