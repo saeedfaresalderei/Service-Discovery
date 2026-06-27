@@ -185,7 +185,10 @@ function renderResults() {
       const description = displayField(s, "description");
       const location = displayField(s, "location");
       const hours = displayField(s, "hours");
-      const mapsQuery = encodeURIComponent(`${s.location} ${s.name}`);
+      const coordsMatch = s.location.match(/^\s*(-?\d+(\.\d+)?)\s*,\s*(-?\d+(\.\d+)?)\s*$/);
+      const mapsQuery = encodeURIComponent(
+        coordsMatch ? `${coordsMatch[1]},${coordsMatch[3]}` : `${s.location} ${s.name}`
+      );
       const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
       return `
