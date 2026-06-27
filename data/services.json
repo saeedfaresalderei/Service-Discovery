@@ -2,111 +2,166 @@
   {
     "id": "alqua-health-clinic",
     "name": "Al Qua'a Health Clinic",
+    "nameAr": "عيادة القُعة الصحية",
     "category": "Healthcare",
     "description": "Primary healthcare center serving Al Qua'a residents: general consultations, vaccinations, and basic emergency stabilization.",
+    "descriptionAr": "مركز رعاية صحية أولية لخدمة سكان القُعة: استشارات عامة، تطعيمات، وإسعافات أولية للحالات الطارئة.",
     "location": "Al Qua'a Main Road, Al Qua'a, Al Ain",
+    "locationAr": "الطريق الرئيسي، القُعة، العين",
     "hours": "Sun–Thu 8:00 AM–4:00 PM",
+    "hoursAr": "الأحد–الخميس ٨:٠٠ص–٤:٠٠م",
     "phone": "+971-3-700-0001",
-    "tags": ["health", "clinic", "emergency", "vaccination"]
+    "tags": ["health", "clinic", "emergency", "vaccination"],
+    "tagsAr": ["صحة", "عيادة", "طوارئ", "تطعيم"]
   },
   {
     "id": "alqua-municipal-office",
     "name": "Al Qua'a Municipal Service Center",
+    "nameAr": "مركز الخدمات البلدية بالقُعة",
     "category": "Government",
     "description": "Government services counter for ID renewals, permits, utility applications, and municipal paperwork.",
+    "descriptionAr": "نافذة خدمات حكومية لتجديد الهوية، التصاريح، طلبات المرافق، والمعاملات البلدية.",
     "location": "Al Qua'a Civic Center, Al Ain",
+    "locationAr": "المركز المدني، القُعة، العين",
     "hours": "Sun–Thu 7:30 AM–2:30 PM",
+    "hoursAr": "الأحد–الخميس ٧:٣٠ص–٢:٣٠م",
     "phone": "+971-3-700-0002",
-    "tags": ["government", "permits", "id", "paperwork", "utilities"]
+    "tags": ["government", "permits", "id", "paperwork", "utilities"],
+    "tagsAr": ["حكومة", "تصاريح", "هوية", "معاملات", "مرافق"]
   },
   {
     "id": "camel-farmers-cooperative",
     "name": "Al Qua'a Camel Farmers Cooperative",
+    "nameAr": "جمعية مزارعي الإبل بالقُعة",
     "category": "Agriculture & Livestock",
     "description": "Support hub for camel farming operations: veterinary referrals, feed supply coordination, and market price information.",
+    "descriptionAr": "مركز دعم لعمليات تربية الإبل: تحويلات بيطرية، تنسيق توريد الأعلاف، ومعلومات أسعار السوق.",
     "location": "Al Qua'a Agricultural Zone, Al Ain",
+    "locationAr": "المنطقة الزراعية، القُعة، العين",
     "hours": "Sat–Thu 6:00 AM–12:00 PM",
+    "hoursAr": "السبت–الخميس ٦:٠٠ص–١٢:٠٠م",
     "phone": "+971-3-700-0003",
-    "tags": ["agriculture", "camel", "livestock", "veterinary", "market"]
+    "tags": ["agriculture", "camel", "livestock", "veterinary", "market"],
+    "tagsAr": ["زراعة", "إبل", "ماشية", "بيطري", "سوق"]
   },
   {
     "id": "alqua-school",
     "name": "Al Qua'a Community School",
+    "nameAr": "مدرسة المجتمع بالقُعة",
     "category": "Education",
     "description": "Primary and secondary education for local children, plus adult literacy and vocational evening classes.",
+    "descriptionAr": "تعليم أساسي وثانوي لأطفال المنطقة، إضافة إلى محو أمية الكبار وصفوف مسائية مهنية.",
     "location": "Al Qua'a School Road, Al Ain",
+    "locationAr": "طريق المدرسة، القُعة، العين",
     "hours": "Sun–Thu 7:00 AM–2:00 PM (evening classes 6–8 PM)",
+    "hoursAr": "الأحد–الخميس ٧:٠٠ص–٢:٠٠م (صفوف مسائية ٦–٨م)",
     "phone": "+971-3-700-0004",
-    "tags": ["education", "school", "literacy", "vocational"]
+    "tags": ["education", "school", "literacy", "vocational"],
+    "tagsAr": ["تعليم", "مدرسة", "محو أمية", "مهني"]
   },
   {
     "id": "alqua-transport",
     "name": "Al Qua'a Rural Transport Line",
+    "nameAr": "خط النقل الريفي بالقُعة",
     "category": "Transport",
     "description": "Scheduled minibus service connecting Al Qua'a to Al Ain city center for residents without private vehicles.",
+    "descriptionAr": "خدمة حافلات صغيرة مجدولة تربط القُعة بمركز مدينة العين لمن لا يملكون مركبات خاصة.",
     "location": "Pickup point: Al Qua'a Roundabout, Al Ain",
+    "locationAr": "نقطة الانطلاق: دوار القُعة، العين",
     "hours": "Daily, departures every 2 hours, 6:00 AM–8:00 PM",
+    "hoursAr": "يوميًا، كل ساعتين، ٦:٠٠ص–٨:٠٠م",
     "phone": "+971-3-700-0005",
-    "tags": ["transport", "bus", "mobility"]
+    "tags": ["transport", "bus", "mobility"],
+    "tagsAr": ["نقل", "حافلة", "تنقل"]
   },
   {
     "id": "civil-defense-alqua",
     "name": "Civil Defense & Emergency Response – Al Qua'a Sector",
+    "nameAr": "الدفاع المدني والاستجابة للطوارئ – قطاع القُعة",
     "category": "Emergency",
     "description": "Coordinated emergency response covering fire, medical evacuation, and search-and-rescue across the dispersed Al Qua'a area.",
+    "descriptionAr": "استجابة طارئة منسّقة تشمل الحرائق، الإخلاء الطبي، والبحث والإنقاذ في منطقة القُعة الواسعة.",
     "location": "Al Qua'a Emergency Station, Al Ain",
+    "locationAr": "محطة الطوارئ، القُعة، العين",
     "hours": "24/7",
+    "hoursAr": "على مدار الساعة",
     "phone": "+971-3-700-0006",
-    "tags": ["emergency", "fire", "rescue", "evacuation", "24/7"]
+    "tags": ["emergency", "fire", "rescue", "evacuation", "24/7"],
+    "tagsAr": ["طوارئ", "حريق", "إنقاذ", "إخلاء"]
   },
   {
     "id": "stargazing-tourism-desk",
     "name": "Al Qua'a Stargazing & Tourism Desk",
+    "nameAr": "مكتب السياحة ورصد النجوم بالقُعة",
     "category": "Tourism & Events",
     "description": "Information point for stargazing tours, desert camping permits, and local cultural events — a growing income opportunity for residents.",
+    "descriptionAr": "نقطة معلومات لرحلات رصد النجوم، تصاريح التخييم الصحراوي، والفعاليات الثقافية المحلية.",
     "location": "Al Qua'a Visitor Point, Al Ain",
+    "locationAr": "نقطة الزوار، القُعة، العين",
     "hours": "Thu–Sat 4:00 PM–10:00 PM",
+    "hoursAr": "الخميس–السبت ٤:٠٠م–١٠:٠٠م",
     "phone": "+971-3-700-0007",
-    "tags": ["tourism", "events", "stargazing", "income", "opportunity"]
+    "tags": ["tourism", "events", "stargazing", "income", "opportunity"],
+    "tagsAr": ["سياحة", "فعاليات", "رصد النجوم", "دخل", "فرصة"]
   },
   {
     "id": "small-business-support",
     "name": "Al Qua'a Small Business Support Desk",
+    "nameAr": "مكتب دعم المشاريع الصغيرة بالقُعة",
     "category": "Entrepreneurship",
     "description": "Guidance for first-time founders: business licensing steps, microfinance referrals, and basic bookkeeping help.",
+    "descriptionAr": "إرشاد لأصحاب المشاريع الجدد: خطوات الترخيص التجاري، تحويلات التمويل الصغير، والمساعدة المحاسبية الأساسية.",
     "location": "Al Qua'a Civic Center, Al Ain",
+    "locationAr": "المركز المدني، القُعة، العين",
     "hours": "Sun & Tue 9:00 AM–1:00 PM",
+    "hoursAr": "الأحد والثلاثاء ٩:٠٠ص–١:٠٠م",
     "phone": "+971-3-700-0008",
-    "tags": ["entrepreneurship", "business", "licensing", "finance"]
+    "tags": ["entrepreneurship", "business", "licensing", "finance"],
+    "tagsAr": ["ريادة أعمال", "أعمال", "ترخيص", "تمويل"]
   },
   {
     "id": "alqua-veterinary-clinic",
     "name": "Al Qua'a Veterinary Clinic",
+    "nameAr": "العيادة البيطرية بالقُعة",
     "category": "Agriculture & Livestock",
     "description": "Dedicated veterinary clinic for camels and livestock: checkups, vaccinations, and emergency animal care.",
+    "descriptionAr": "عيادة بيطرية مخصصة للإبل والمواشي: فحوصات، تطعيمات، ورعاية طارئة للحيوانات.",
     "location": "Al Qua'a Agricultural Zone, Al Ain",
+    "locationAr": "المنطقة الزراعية، القُعة، العين",
     "hours": "Sat–Thu 7:00 AM–3:00 PM",
+    "hoursAr": "السبت–الخميس ٧:٠٠ص–٣:٠٠م",
     "phone": "+971-3-700-0009",
-    "tags": ["veterinary", "camel", "livestock", "animal health", "clinic"]
+    "tags": ["veterinary", "camel", "livestock", "animal health", "clinic"],
+    "tagsAr": ["بيطري", "إبل", "ماشية", "صحة حيوانية", "عيادة"]
   },
   {
     "id": "alqua-water-utilities",
     "name": "Al Qua'a Water & Utilities Office",
+    "nameAr": "مكتب المياه والمرافق بالقُعة",
     "category": "Government",
     "description": "Reporting and support for water supply, electricity, and utility connections in the Al Qua'a area.",
+    "descriptionAr": "استقبال البلاغات والدعم لإمدادات المياه والكهرباء وتوصيلات المرافق في منطقة القُعة.",
     "location": "Al Qua'a Civic Center, Al Ain",
+    "locationAr": "المركز المدني، القُعة، العين",
     "hours": "Sun–Thu 8:00 AM–3:00 PM",
+    "hoursAr": "الأحد–الخميس ٨:٠٠ص–٣:٠٠م",
     "phone": "+971-3-700-0010",
-    "tags": ["water", "electricity", "utilities", "government"]
+    "tags": ["water", "electricity", "utilities", "government"],
+    "tagsAr": ["مياه", "كهرباء", "مرافق", "حكومة"]
   },
   {
     "id": "alqua-mobile-pharmacy",
     "name": "Al Qua'a Mobile Pharmacy",
+    "nameAr": "الصيدلية المتنقلة بالقُعة",
     "category": "Healthcare",
     "description": "Weekly mobile pharmacy visiting Al Qua'a to dispense prescriptions and basic over-the-counter medicine.",
+    "descriptionAr": "صيدلية متنقلة تزور القُعة أسبوعيًا لصرف الأدوية الموصوفة والأدوية الأساسية دون وصفة.",
     "location": "Stops at Al Qua'a Roundabout and the Health Clinic",
+    "locationAr": "تتوقف عند دوار القُعة وعيادة القُعة الصحية",
     "hours": "Tue & Fri 9:00 AM–1:00 PM",
+    "hoursAr": "الثلاثاء والجمعة ٩:٠٠ص–١:٠٠م",
     "phone": "+971-3-700-0011",
-    "tags": ["health", "pharmacy", "medicine", "clinic"]
+    "tags": ["health", "pharmacy", "medicine", "clinic"],
+    "tagsAr": ["صحة", "صيدلية", "دواء", "عيادة"]
   }
 ]

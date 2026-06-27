@@ -24,6 +24,41 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html[dir="rtl"] body {
+  font-family: "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+}
+
+html[dir="rtl"] .service-meta a,
+html[dir="rtl"] .emergency-banner,
+html[dir="rtl"] .add-service-form label {
+  text-align: right;
+}
+
+.lang-toggle {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1;
+}
+
+html[dir="rtl"] .lang-toggle {
+  right: auto;
+  left: 1.5rem;
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .container {
   max-width: 1080px;
   margin: 0 auto;
@@ -35,7 +70,10 @@ body {
   color: #fff;
   padding: 3.25rem 0 2.75rem;
   position: relative;
-  overflow: hidden;
+}
+
+.header-inner {
+  position: relative;
 }
 
 .site-header::after {

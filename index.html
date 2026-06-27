@@ -6,13 +6,16 @@
 <title>Al Qua'a Service Discovery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <h1>🐪 Al Qua'a Service Discovery</h1>
-      <p class="tagline">Find local services, support, and opportunities in Al Qua'a — fast.</p>
+      <button id="langToggle" class="lang-toggle" type="button">العربية</button>
+      <h1>🐪 <span data-i18n="title">Al Qua'a Service Discovery</span></h1>
+      <p class="tagline" data-i18n="tagline">Find local services, support, and opportunities in Al Qua'a — fast.</p>
     </div>
   </header>
 
@@ -21,71 +24,73 @@
       <input
         id="searchInput"
         type="text"
+        data-i18n-placeholder="searchPlaceholder"
         placeholder="What do you need? e.g. clinic, transport, camel, permit..."
         aria-label="Search services"
       />
       <div id="categoryFilters" class="category-filters"></div>
-      <button id="addServiceBtn" class="add-service-btn" type="button">+ Add a service</button>
+      <button id="addServiceBtn" class="add-service-btn" type="button" data-i18n="addServiceBtn">+ Add a service</button>
     </section>
 
     <dialog id="addServiceDialog">
       <form id="addServiceForm" class="add-service-form">
-        <h2>Add a local service</h2>
+        <h2 data-i18n="addServiceTitle">Add a local service</h2>
         <ul id="formErrors" class="form-errors" hidden></ul>
 
-        <label>Name
+        <label data-i18n="fieldName">Name
           <input type="text" name="name" required>
         </label>
 
-        <label>Category
+        <label data-i18n="fieldCategory">Category
           <input type="text" name="category" required placeholder="e.g. Healthcare">
         </label>
 
-        <label>Description
+        <label data-i18n="fieldDescription">Description
           <textarea name="description" required rows="3"></textarea>
         </label>
 
-        <label>Location
+        <label data-i18n="fieldLocation">Location
           <input type="text" name="location" required>
         </label>
 
-        <label>Hours
+        <label data-i18n="fieldHours">Hours
           <input type="text" name="hours" required placeholder="e.g. Sun-Thu 8AM-4PM">
         </label>
 
-        <label>Phone
+        <label data-i18n="fieldPhone">Phone
           <input type="tel" name="phone" required placeholder="+971-...">
         </label>
 
-        <label>Tags (comma-separated)
+        <label data-i18n="fieldTags">Tags (comma-separated)
           <input type="text" name="tags" placeholder="e.g. health, clinic, emergency">
         </label>
 
         <div class="form-actions">
-          <button type="button" id="cancelAddBtn">Cancel</button>
-          <button type="submit" class="primary">Save service</button>
+          <button type="button" id="cancelAddBtn" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="primary" data-i18n="saveService">Save service</button>
         </div>
       </form>
     </dialog>
 
     <section aria-label="Emergency quick access" class="emergency-banner">
-      <strong>Emergency?</strong> Civil Defense &amp; Emergency Response is available 24/7 —
-      <a href="tel:+97137000006">call +971-3-700-0006</a>
+      <strong data-i18n="emergencyLabel">Emergency?</strong>
+      <span data-i18n="emergencyText">Civil Defense &amp; Emergency Response is available 24/7 —</span>
+      <a href="tel:+97137000006" data-i18n="emergencyCall">call +971-3-700-0006</a>
     </section>
 
     <section>
       <p id="resultsCount" class="results-count"></p>
       <div id="resultsGrid" class="results-grid"></div>
-      <p id="noResults" class="no-results" hidden>No services match your search. Try a different keyword.</p>
+      <p id="noResults" class="no-results" hidden data-i18n="noResults">No services match your search. Try a different keyword.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Built for the Tatweer Hackathon 2026 — Service Discovery Challenge — Al Qua'a, Al Ain.</p>
+      <p data-i18n="footer">Built for the Tatweer Hackathon 2026 — Service Discovery Challenge — Al Qua'a, Al Ain.</p>
     </div>
   </footer>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
