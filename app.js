@@ -200,6 +200,7 @@ function renderResults() {
   const query = searchInput.value.trim();
   const filtered = services.filter(
     (s) =>
+      s.status !== "pending" &&
       (activeCategory === "All" || s.category === activeCategory) &&
       matchesQuery(s, query)
   );
@@ -344,10 +345,10 @@ addServiceForm.addEventListener("submit", (e) => {
   }
   formErrors.hidden = true;
 
-  const summary = `Please confirm this is correct before adding it:\n\n${draft.name}\n${draft.category}\n${draft.location}\n${draft.hours}\n${draft.phone}`;
+  const summary = `Please confirm this is correct before submitting it for review:\n\n${draft.name}\n${draft.category}\n${draft.location}\n${draft.hours}\n${draft.phone}`;
   if (!confirm(summary)) return;
 
-  const newService = { id: `custom-${Date.now()}`, ...draft, isCustom: true };
+  const newService = { id: `custom-${Date.now()}`, ...draft, isCustom: true, status: "pending" };
 
   const custom = loadCustomServices();
   custom.push(newService);
@@ -359,6 +360,78 @@ addServiceForm.addEventListener("submit", (e) => {
 
   addServiceForm.reset();
   addServiceDialog.close();
+  alert("Thanks! Your submission is pending admin review and will appear once approved.");
 });
+
+const ADMIN_PASSCODE = "alqua-admin";
+const adminBtn = document.getElementById("adminBtn");
+const adminDialog = document.getElementById("adminDialog");
+const adminPendingList = document.getElementById("adminPendingList");
+const closeAdminBtn = document.getElementById("closeAdminBtn");
+
+function renderAdminPanel() {
+  const pending = loadCustomServices().filter((s) => s.status === "pending");
+
+  if (pending.length === 0) {
+    adminPendingList.innerHTML = "<p>No pending submissions.</p>";
+    return;
+  }
+
+  adminPendingList.innerHTML = pending
+    .map(
+      (s) => `
+      <div class="admin-pending-card">
+        <h4>${escapeHtml(s.name)}</h4>
+        <p><strong>${escapeHtml(s.category)}</strong></p>
+        <p>${escapeHtml(s.description)}</p>
+        <p>📍 ${escapeHtml(s.location)} &nbsp; 🕒 ${escapeHtml(s.hours)} &nbsp; 📞 ${escapeHtml(s.phone)}</p>
+        <div class="admin-actions">
+          <button type="button" class="approve-btn" data-id="${escapeHtml(s.id)}">Approve</button>
+          <button type="button" class="reject-btn" data-id="${escapeHtml(s.id)}">Reject</button>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+
+  adminPendingList.querySelectorAll(".approve-btn").forEach((btn) => {
+    btn.addEventListener("click", () => setSubmissionStatus(btn.dataset.id, "approved"));
+  });
+  adminPendingList.querySelectorAll(".reject-btn").forEach((btn) => {
+    btn.addEventListener("click", () => setSubmissionStatus(btn.dataset.id, "rejected"));
+  });
+}
+
+function setSubmissionStatus(id, status) {
+  const custom = loadCustomServices();
+  const target = custom.find((s) => s.id === id);
+  if (!target) return;
+
+  if (status === "rejected") {
+    saveCustomServices(custom.filter((s) => s.id !== id));
+    services = services.filter((s) => s.id !== id);
+  } else {
+    target.status = status;
+    saveCustomServices(custom);
+    const inMemory = services.find((s) => s.id === id);
+    if (inMemory) inMemory.status = status;
+  }
+
+  renderAdminPanel();
+  renderCategoryChips();
+  renderResults();
+}
+
+adminBtn.addEventListener("click", () => {
+  const passcode = prompt("Enter admin passcode:");
+  if (passcode !== ADMIN_PASSCODE) {
+    if (passcode !== null) alert("Incorrect passcode.");
+    return;
+  }
+  renderAdminPanel();
+  adminDialog.showModal();
+});
+
+closeAdminBtn.addEventListener("click", () => adminDialog.close());
 
 init();

@@ -376,6 +376,90 @@ dialog::backdrop {
   color: #fff;
 }
 
+.admin-link {
+  display: block;
+  margin: 0.75rem auto 0;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-dialog {
+  max-width: 560px;
+}
+
+.admin-dialog h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.admin-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+.admin-pending-card {
+  background: var(--sand);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-pending-card h4 {
+  margin: 0 0 0.3rem;
+  font-size: 0.98rem;
+}
+
+.admin-pending-card p {
+  margin: 0 0 0.3rem;
+  font-size: 0.85rem;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid;
+}
+
+.approve-btn {
+  background: #2e7d4f;
+  border-color: #2e7d4f;
+  color: #fff;
+}
+
+.approve-btn:hover {
+  background: #246340;
+}
+
+.reject-btn {
+  background: #fff;
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.reject-btn:hover {
+  background: #d9534f;
+  color: #fff;
+}
+
 .form-errors {
   background: #fdecea;
   border: 1px solid #f1b3ab;

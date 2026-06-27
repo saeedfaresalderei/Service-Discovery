@@ -56,6 +56,21 @@ In a production deployment with a real backend, this would extend to an admin
 moderation queue before a submission goes public — the current client-side checks are
 the hackathon-scale version of that same safeguard.
 
+### Admin review (prototype)
+
+New community submissions are saved with a **"pending"** status and stay hidden from
+public search until approved. A passcode-gated **Admin** link (bottom of the page)
+opens a review queue where pending submissions can be **approved** (goes live) or
+**rejected** (deleted).
+
+**Important limitation, by design**: this app has no backend, so all data — including
+the pending queue — lives in the browser's `localStorage` on a single device. This
+demo proves the moderation *workflow*, but it cannot let an admin review submissions
+made on a different device. A production version would move this queue into a shared
+database (e.g. Firebase/Supabase) so submissions are centrally stored and any admin,
+from any device, can review them — the UI and approve/reject logic would not need to
+change, only where the data lives.
+
 ## Tech Stack
 
 Plain **HTML / CSS / JavaScript** — zero build tooling, zero dependencies. Chosen

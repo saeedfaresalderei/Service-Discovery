@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
   <header class="site-header">
@@ -72,6 +72,15 @@
       </form>
     </dialog>
 
+    <dialog id="adminDialog" class="admin-dialog">
+      <h2>Admin Review — Pending Submissions</h2>
+      <p class="admin-note">Demo-only moderation queue, local to this browser. See README for the production approach.</p>
+      <div id="adminPendingList"></div>
+      <div class="form-actions">
+        <button type="button" id="closeAdminBtn">Close</button>
+      </div>
+    </dialog>
+
     <section aria-label="Emergency quick access" class="emergency-banner">
       <strong data-i18n="emergencyLabel">Emergency?</strong>
       <span data-i18n="emergencyText">Civil Defense &amp; Emergency Response is available 24/7 —</span>
@@ -88,9 +97,10 @@
   <footer class="site-footer">
     <div class="container">
       <p data-i18n="footer">Built for the Tatweer Hackathon 2026 — Service Discovery Challenge — Al Qua'a, Al Ain.</p>
+      <button id="adminBtn" class="admin-link" type="button">Admin</button>
     </div>
   </footer>
 
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
