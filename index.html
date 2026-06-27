@@ -23,7 +23,47 @@
         aria-label="Search services"
       />
       <div id="categoryFilters" class="category-filters"></div>
+      <button id="addServiceBtn" class="add-service-btn" type="button">+ Add a service</button>
     </section>
+
+    <dialog id="addServiceDialog">
+      <form id="addServiceForm" class="add-service-form">
+        <h2>Add a local service</h2>
+
+        <label>Name
+          <input type="text" name="name" required>
+        </label>
+
+        <label>Category
+          <input type="text" name="category" required placeholder="e.g. Healthcare">
+        </label>
+
+        <label>Description
+          <textarea name="description" required rows="3"></textarea>
+        </label>
+
+        <label>Location
+          <input type="text" name="location" required>
+        </label>
+
+        <label>Hours
+          <input type="text" name="hours" required placeholder="e.g. Sun-Thu 8AM-4PM">
+        </label>
+
+        <label>Phone
+          <input type="tel" name="phone" required placeholder="+971-...">
+        </label>
+
+        <label>Tags (comma-separated)
+          <input type="text" name="tags" placeholder="e.g. health, clinic, emergency">
+        </label>
+
+        <div class="form-actions">
+          <button type="button" id="cancelAddBtn">Cancel</button>
+          <button type="submit" class="primary">Save service</button>
+        </div>
+      </form>
+    </dialog>
 
     <section aria-label="Emergency quick access" class="emergency-banner">
       <strong>Emergency?</strong> Civil Defense &amp; Emergency Response is available 24/7 —

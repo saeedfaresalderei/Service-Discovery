@@ -71,13 +71,67 @@ function renderResults() {
     .join("");
 }
 
+const CUSTOM_KEY = "alqua-custom-services";
+
+function loadCustomServices() {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOM_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCustomServices(list) {
+  localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
+}
+
 async function init() {
-  const res = await fetch("data/services.json");
-  services = await res.json();
+  const res = await fetch(`data/services.json?v=${Date.now()}`, { cache: "no-store" });
+  const baseServices = await res.json();
+  services = [...baseServices, ...loadCustomServices()];
   renderCategoryChips();
   renderResults();
 }
 
 searchInput.addEventListener("input", renderResults);
+
+const addServiceBtn = document.getElementById("addServiceBtn");
+const addServiceDialog = document.getElementById("addServiceDialog");
+const addServiceForm = document.getElementById("addServiceForm");
+const cancelAddBtn = document.getElementById("cancelAddBtn");
+
+addServiceBtn.addEventListener("click", () => addServiceDialog.showModal());
+cancelAddBtn.addEventListener("click", () => addServiceDialog.close());
+
+addServiceForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(addServiceForm);
+
+  const newService = {
+    id: `custom-${Date.now()}`,
+    name: formData.get("name").trim(),
+    category: formData.get("category").trim(),
+    description: formData.get("description").trim(),
+    location: formData.get("location").trim(),
+    hours: formData.get("hours").trim(),
+    phone: formData.get("phone").trim(),
+    tags: formData
+      .get("tags")
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean),
+  };
+
+  const custom = loadCustomServices();
+  custom.push(newService);
+  saveCustomServices(custom);
+
+  services.push(newService);
+  renderCategoryChips();
+  renderResults();
+
+  addServiceForm.reset();
+  addServiceDialog.close();
+});
 
 init();

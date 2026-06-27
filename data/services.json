@@ -78,5 +78,35 @@
     "hours": "Sun & Tue 9:00 AM–1:00 PM",
     "phone": "+971-3-700-0008",
     "tags": ["entrepreneurship", "business", "licensing", "finance"]
+  },
+  {
+    "id": "alqua-veterinary-clinic",
+    "name": "Al Qua'a Veterinary Clinic",
+    "category": "Agriculture & Livestock",
+    "description": "Dedicated veterinary clinic for camels and livestock: checkups, vaccinations, and emergency animal care.",
+    "location": "Al Qua'a Agricultural Zone, Al Ain",
+    "hours": "Sat–Thu 7:00 AM–3:00 PM",
+    "phone": "+971-3-700-0009",
+    "tags": ["veterinary", "camel", "livestock", "animal health", "clinic"]
+  },
+  {
+    "id": "alqua-water-utilities",
+    "name": "Al Qua'a Water & Utilities Office",
+    "category": "Government",
+    "description": "Reporting and support for water supply, electricity, and utility connections in the Al Qua'a area.",
+    "location": "Al Qua'a Civic Center, Al Ain",
+    "hours": "Sun–Thu 8:00 AM–3:00 PM",
+    "phone": "+971-3-700-0010",
+    "tags": ["water", "electricity", "utilities", "government"]
+  },
+  {
+    "id": "alqua-mobile-pharmacy",
+    "name": "Al Qua'a Mobile Pharmacy",
+    "category": "Healthcare",
+    "description": "Weekly mobile pharmacy visiting Al Qua'a to dispense prescriptions and basic over-the-counter medicine.",
+    "location": "Stops at Al Qua'a Roundabout and the Health Clinic",
+    "hours": "Tue & Fri 9:00 AM–1:00 PM",
+    "phone": "+971-3-700-0011",
+    "tags": ["health", "pharmacy", "medicine", "clinic"]
   }
 ]

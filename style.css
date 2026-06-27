@@ -150,6 +150,79 @@ body {
   font-weight: 600;
 }
 
+.add-service-btn {
+  margin-top: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-service-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+dialog {
+  border: none;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 420px;
+  width: 90%;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.add-service-form h2 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.add-service-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  color: #5c5142;
+}
+
+.add-service-form input,
+.add-service-form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--sand-dark);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--sand-dark);
+  background: #fff;
+  cursor: pointer;
+}
+
+.form-actions .primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
 .no-results {
   text-align: center;
   color: #5c5142;
