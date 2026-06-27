@@ -5,6 +5,8 @@ A submission for the **Tatweer Hackathon 2026** — Challenge: **Service Discove
 
 **Live site:** https://saeedfaresalderei.github.io/Service-Discovery/
 
+**Demo video:** https://drive.google.com/file/d/1SWCmy1pDtV1ayB1PFlRZFaJGDgjwiiY2/view?usp=sharing
+
 ## Problem
 
 Al Qua'a is a dispersed rural community in Al Ain, UAE, built around camel farming, with
