@@ -3,6 +3,8 @@
 A submission for the **Tatweer Hackathon 2026** — Challenge: **Service Discovery**
 ("Connect residents with local services, opportunities, and events")
 
+**Live site:** https://saeedfaresalderei.github.io/Service-Discovery/
+
 ## Problem
 
 Al Qua'a is a dispersed rural community in Al Ain, UAE, built around camel farming, with
@@ -76,6 +78,11 @@ Anyone can submit (always starts as `pending`); only an authenticated admin can 
 pending submissions, approve, or reject. The public search query only ever reads
 `approved` documents, so unmoderated content is never shown by default.
 
+**To test the admin flow**: admin credentials are intentionally not published in this
+README, since this repo is public and real login access would let anyone alter live
+data. Credentials are available on request (e.g. from the team during the live demo or
+on contact) for judges who want to verify the moderation workflow themselves.
+
 ## Tech Stack
 
 Plain **HTML / CSS / JavaScript** — zero build tooling, zero dependencies. Chosen
@@ -109,10 +116,9 @@ deploy from `main` branch, root folder).
 
 ## Future extensions
 
-- Community-submitted listings via a simple form + moderation queue.
-- Multi-language support (Arabic/English toggle).
 - Offline support via a service worker (PWA) for low-connectivity areas.
-- Map view using listed locations.
+- Region selector to support multiple communities from the same app.
+- Richer admin tooling (edit-in-place, bulk approve, submission history).
 
 ## Team / Hackathon
 
